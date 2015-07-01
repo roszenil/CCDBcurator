@@ -19,7 +19,7 @@ You can use package chromer from Matt Pennell to download datasets from https://
 
 You have to do this because  there are so many particular cases that are being scan in the internal functions of CCDB. I try to add all of the cases, and enumerate them below. However, you should expect some errors still in CCDBcurator v1.
 
-### Good news: If you need any angiosperm genus you don't need to do any of the steps above. I am providing an already revised dataset in this version.
+-If you need any angiosperm genus you don't need to do any of the steps above. I am providing partially revised dataset in this version. Make sure to cite CCDB authors if you use it-
 
 Load the library of CCDB curator
 ```{r}
