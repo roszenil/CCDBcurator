@@ -29,6 +29,10 @@ a2<-unlist(strsplit(as.character(a2),"I",fixed=TRUE,perl=FALSE,useBytes=FALSE))
 a3<-unlist(strsplit(as.character(a2), "or", fixed=TRUE,perl=FALSE,useBytes=FALSE))
 a3<-unlist(strsplit(as.character(a3),"B",fixed=TRUE,perl=FALSE,useBytes=FALSE))
 a3<-unlist(strsplit(as.character(a3),"," ,fixed=TRUE,perl=FALSE, useBytes=FALSE))
+a3<-unlist(strsplit(as.character(a3),"2x" ,fixed=TRUE,perl=FALSE, useBytes=FALSE))
+a3<-unlist(strsplit(as.character(a3),"3x" ,fixed=TRUE,perl=FALSE, useBytes=FALSE))
+a3<-unlist(strsplit(as.character(a3),"4x" ,fixed=TRUE,perl=FALSE, useBytes=FALSE))
+
 
 #####Here the inverval listings and the B-chromosomes are removed or plus listings are separated
 long1<-length(a3)
@@ -66,7 +70,15 @@ a6<-as.numeric(unlist(a5)[index])
 aux6<-which(a6==0)
 
 if(length(aux6)>0){ #If there are some zeros left
-a6<-a6[-aux6]} # make it a numerical vector
+	a6<-a6[-aux6]
+}
+ # make it a numerical vector
+aux7<- which(a6>800)
+if(length(aux7)>0){
+	a6<-a6[-aux7]
+}
+
+
 long3<-length(a6)
 
 small.table<-data.frame(rep(genus.name,long3), rep(species.name,long3),a6,rep("gametophytic",long3),rep(aux1$gametophytic,long3),stringsAsFactors=FALSE) #Making a table that is returned where we can see the translatio and the original
