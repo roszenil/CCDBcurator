@@ -1,19 +1,18 @@
----
-output: pdf_document
----
+
 CCDB Tutorial
 ===========================================
 author: Rosana Zenil-Ferguson
 date: July 1, 2015
 
 
-### WARNING: To use this package you will have  a dataset from CCDB and clean it before hand.
+### WARNING: To use this package you will have to download a dataset from CCDB and use chromer  before hand.
 
 Download your dataset at  http://ccdb.tau.ac.il/
 
 You can use package chromer from Matt Pennell to download datasets from https://github.com/ropensci/chromer
 
-###How do I clean my dataset?
+#### Cleaning a bit after download
+How do I clean it?
 1. From the resolved_binomial column on CCDB download you need to create two extra columns one named Genus and another one named Species. It is easy to do in excel by selecting text-to-columns function. You must have those two columns to use the package otherwise it will return error (check the capitalization in the Genus and Species column name)
 2. Try to erase strings like (i), (ii) and blank spaces in strings like +(space)0-1. This is easy to do in a text editor using replace function. 
 
