@@ -56,7 +56,7 @@ for(i in 1:long1){
 			if(length(aux3)>2){
 				aux3<-aux3[-is.na(aux3)]
 			}
-			aux4<-seq(aux3[1],aux3[2],1) #Intervals: are there a sequence or first and last??
+			aux4<-c(aux3[1],aux3[2]) #First and last of that interval
 			}else{
 				 aux4<-as.numeric(unlist(strsplit(as.character(a3[i]),"[^0-9]"))) } # The rest are numbers
 				 
