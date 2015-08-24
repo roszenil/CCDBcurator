@@ -3,9 +3,11 @@ CCDBcurator<-function(cleanCCDBsample){
 #source("sporophytictranslate.R")	
 no.rows<-dim(cleanCCDBsample)[1]
 
+print(1)
 cleandataset<-gametophytic.translator(cleanCCDBsample[1,])
 cleandataset<-rbind(cleandataset,sporophytic.translator(cleanCCDBsample[1,]))
 for(i in 2:no.rows){
+	print(i)
 	cleandataset<-rbind(cleandataset,gametophytic.translator(cleanCCDBsample[i,]))
 	cleandataset<-rbind(cleandataset,sporophytic.translator(cleanCCDBsample[i,]))
 }
