@@ -1,9 +1,11 @@
 Package: CCDBcurator
 Type: Package
 Title: Chromosome Count Database curator
-Version: 1.0
-Date: 2015-07-01
+Version: 2.0
+Date: 2018-07-01
 Author: Rosana Zenil-Ferguson
-Maintainer: RZF <rzenil@ufl.edu>
+Maintainer: RZF <rzenil@umn.edu>
 Description: Cleans records of CCDB dataset. Curates chromosome numbers, and calculates haploid set.
-License:GPL-2
+License: GPL-2
+LazyData: true
+RoxygenNote: 6.0.1
