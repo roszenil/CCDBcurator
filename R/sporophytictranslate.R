@@ -120,14 +120,16 @@ long1<-length(a3)
 a4<-rep(0,long1)
 for(i in 1:long1){
   a4[i]<-gsub("(\\+[^0-9])([0-9])","\\+\\2",a3[i])
-  aux3<-a3[i]
+  aux3<-a4[i]
   if(grepl("([0-9]{1,3})[+]0[+]([0-9]{1,3})",aux3)==TRUE){
     aux3=aux3
   }else{
-    if(grepl("[0-9]-[0-9]",a3[i], ignore.case=FALSE, perl=FALSE, fixed=FALSE, useBytes=FALSE)==TRUE){
-      a4[i]<-gsub("([0-9])(\\+[0-9]-[0-9])", "\\1", a3[i])
+    if(grepl("[0-9]-[0-9]",aux3, ignore.case=FALSE, perl=FALSE, fixed=FALSE, useBytes=FALSE)==TRUE){
+      a4[i]<-gsub("([0-9])(\\+[0-9]{1,3}-[0-9]{1,3})", "\\1", aux3)
+      aux3<-a4[i]
+      a4[i]<-gsub("([0-9]{1,3})[-]([0-9]{1,3})", "\\1 \\2", aux3)
     }else{
-      a4[i]<-gsub("([0-9])(\\+[0-9])", "\\1", a3[i])
+      a4[i]<-gsub("([0-9])(\\+[0-9]{1,3})", "\\1", aux3)
     }
   }
 }
@@ -148,6 +150,7 @@ aux8<-grep("%",a4)
 if(length(aux8)>0){
 a4<-a4[-aux8]
 }
+
 a6<-list()
 for(i in 1:long1){
   aux4<-0	

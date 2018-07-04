@@ -112,21 +112,23 @@ gametophytic.translator<-function(rowfromCCDB){
               }
           }
       }
-      long1<-length(a3)
-      a4<-rep(0,long1)
-      for(i in 1:long1){
-        a4[i]<-gsub("(\\+[^0-9])([0-9])","\\+\\2",a3[i])
-        aux3<-a3[i]
-        if(grepl("([0-9]{1,3})[+]0[+]([0-9]{1,3})",aux3)==TRUE){
-          aux3=aux3
-        }else{
-          if(grepl("[0-9]-[0-9]",a3[i], ignore.case=FALSE, perl=FALSE, fixed=FALSE, useBytes=FALSE)==TRUE){
-            a4[i]<-gsub("([0-9])(\\+[0-9]-[0-9])", "\\1", a3[i])
+        long1<-length(a3)
+        a4<-rep(0,long1)
+        for(i in 1:long1){
+          a4[i]<-gsub("(\\+[^0-9])([0-9])","\\+\\2",a3[i])
+          aux3<-a4[i]
+          if(grepl("([0-9]{1,3})[+]0[+]([0-9]{1,3})",aux3)==TRUE){
+            aux3=aux3
           }else{
-            a4[i]<-gsub("([0-9])(\\+[0-9])", "\\1", a3[i])
+            if(grepl("[0-9]-[0-9]",aux3, ignore.case=FALSE, perl=FALSE, fixed=FALSE, useBytes=FALSE)==TRUE){
+              a4[i]<-gsub("([0-9])(\\+[0-9]{1,3}-[0-9]{1,3})", "\\1", aux3)
+              aux3<-a4[i]
+              a4[i]<-gsub("([0-9]{1,3})[-]([0-9]{1,3})", "\\1 \\2", aux3)
+            }else{
+              a4[i]<-gsub("([0-9])(\\+[0-9]{1,3})", "\\1", aux3)
+            }
           }
         }
-      }
       a4<-unlist(strsplit(as.character(a4)," " ,fixed=TRUE,perl=FALSE, useBytes=FALSE))#you have to repeat
       
       #remove1<-grep("\\[+][0-9]",a4, ignore.case=TRUE, perl=FALSE, fixed=FALSE, useBytes=FALSE, invert=FALSE) # Remove plus little intervals
