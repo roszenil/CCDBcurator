@@ -1,3 +1,5 @@
+### THIS IS ONLY AN INTERNAL TESTING FILE NOTHING INFORMATIVE IS HAPPENING HERE
+
 #angioccdb<-read.table(file="~/Dropbox/CCDBcuratorexample/ccdbAngiospermsJune2018.txt",as.is=TRUE,header=TRUE,sep="$", comment.char="&")
 #head(angioccdb)
 #save(angioccdb, file="data/angiospermsCCDBJune2018.RData")

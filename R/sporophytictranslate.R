@@ -2,6 +2,7 @@
 #' @details sporphytic.translator cleans the sporophytic counts of CCDB dataset (downloaded by chromer R package)
 #'
 #' @param rowfromCCDB Input is a row of CCDB downloaded by chromer
+#' @return A data frame with 1 row per chromosome number entry cleaned and the original record
 #' @export
 
 sporophytic.translator<-function(rowfromCCDB){
@@ -39,8 +40,30 @@ if(is.na(aux2)==TRUE){
   a1<-unlist(strsplit(as.character(a1), "(1, 1)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
   a1<-unlist(strsplit(as.character(a1), "(1, 2)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
   a1<-unlist(strsplit(as.character(a1), "(1, 3)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+  a1<-unlist(strsplit(as.character(a1), "(1, 4)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
   a1<-unlist(strsplit(as.character(a1), "(1, 1, 1)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
   a1<-unlist(strsplit(as.character(a1), "(130, 8, 8, 1, 1, 3, 6)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+  a1<-unlist(strsplit(as.character(a1), "(26, 33, 3, 20, 459)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+  a1<-unlist(strsplit(as.character(a1), "(1, 4, 2)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+  a1<-unlist(strsplit(as.character(a1), "(15, 2, 7, 1)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+  a1<-unlist(strsplit(as.character(a1), "(1, 2, 2)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+  a1<-unlist(strsplit(as.character(a1), "(6, 6)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+  a1<-unlist(strsplit(as.character(a1), "(27, 6)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+  a1<-unlist(strsplit(as.character(a1), "(11, 4)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+  a1<-unlist(strsplit(as.character(a1), "(240)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+  a1<-unlist(strsplit(as.character(a1), "(3, 1, 5, 5, 1, 1, 8, 4, 2, 5, 1, 1, 1)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+  a1<-unlist(strsplit(as.character(a1), "(4, 6)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+  a1<-unlist(strsplit(as.character(a1), "(3、21、1、3、4、１)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+  a1<-unlist(strsplit(as.character(a1), "(2, 3, 1)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+  a1<-unlist(strsplit(as.character(a1), "(3, 1)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+  a1<-unlist(strsplit(as.character(a1), "(14, 34, 21, 3)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+  a1<-unlist(strsplit(as.character(a1), "(1, 1, 1, 1)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+  a1<-unlist(strsplit(as.character(a1), "(1, 6, 2,10)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+  a1<-unlist(strsplit(as.character(a1), "(25, 31, 3, 19)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+  a1<-unlist(strsplit(as.character(a1), "(140)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+  a1<-unlist(strsplit(as.character(a1), "(12, 12)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+  a1<-unlist(strsplit(as.character(a1), "(12, 44, 1)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+  a1<-unlist(strsplit(as.character(a1), "(13, 1)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
   a1<-unlist(strsplit(as.character(a1), "(1, 1, 1, 4, 1, 1)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
   a1<-unlist(strsplit(as.character(a1), "(5, 4)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
   a1<-unlist(strsplit(as.character(a1), " (2, 5)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
@@ -74,7 +97,7 @@ if(is.na(aux2)==TRUE){
 #####Here the inverval listings and the B-chromosomes are removed or plus listings are separated
 long1<-length(a2)
 if(long1==0){
-  return("Non informative sporophytic count")
+  #print("Non informative sporophytic count")
 }else{
 a3<-rep(0,long1)
 
@@ -140,7 +163,6 @@ a4<-unlist(strsplit(as.character(a4)," " ,fixed=TRUE,perl=FALSE, useBytes=FALSE)
 
 long1<-length(a4)
 for (i in 1:long1){
-  print(i)
   if(grepl("*",a4[i])==TRUE){
     try(a4[i]<- eval(parse(text=a4[i])), silent=TRUE)
   }
@@ -189,7 +211,10 @@ if(aux7>0){
 small.table<-data.frame(rep(genus.name,long3), rep(species.name,long3),a7,rep("sporophytic",long3),rep(aux1$sporophytic,long3),rep(aux1$resolved_name,long3),stringsAsFactors=FALSE) #Making a table that is returned where we can see the translatio and the original
 names(small.table)<-c("Genus","Species","CountTranslation", "Type","CountOriginal","OriginalNAME")
 return(small.table)
-  }else{print("can't clean gametophytic record")}
+  }else{
+    small.table<-data.frame(rep(genus.name,1), rep(species.name,1),NA,rep("sporophytic",1),rep(aux1$sporophytic,1),rep(aux1$resolved_name,1),stringsAsFactors=FALSE)
+    names(small.table)<-c("Genus","Species","CountTranslation", "Type","CountOriginal","OriginalNAME")
+    return(small.table)}
 }
 }
 }

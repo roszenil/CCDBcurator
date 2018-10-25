@@ -9,9 +9,12 @@ gametophytic.translator(rowfromCCDB)
 \arguments{
 \item{rowfromCCDB}{Input is a row of CCDB downloaded by chromer}
 }
+\value{
+A data frame with 1 row per chromosome number entry cleaned and the original record. Rules of cleaning are slightly different for gametophytic counts.
+}
 \description{
 Cleans gametophytic counts
 }
 \details{
-gametophytic.translator cleans the gametophytic counts of CCDB dataset (downloaded by chromer R package)
+gametophytic.translator cleans the sporophytic counts of CCDB dataset (downloaded by chromer R package)
 }

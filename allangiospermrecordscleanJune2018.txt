@@ -1,7 +1,0 @@
-"Genus"$"Species"$"CountTranslation"$"Type"$"CountOriginal"$"OriginalNAME"$"HaploidNumber"$"Aneuploidy"
-"Chrysanthemum"$"morifolium"$60$"sporophytic"$"60+1B, 62+1B, 62+2Bs, 63, 63+1B, 64(1, 1, 1, 4, 1, 1)"$"Chrysanthemum morifolium Ramat."$30$0
-"Chrysanthemum"$"morifolium"$62$"sporophytic"$"60+1B, 62+1B, 62+2Bs, 63, 63+1B, 64(1, 1, 1, 4, 1, 1)"$"Chrysanthemum morifolium Ramat."$31$0
-"Chrysanthemum"$"morifolium"$62$"sporophytic"$"60+1B, 62+1B, 62+2Bs, 63, 63+1B, 64(1, 1, 1, 4, 1, 1)"$"Chrysanthemum morifolium Ramat."$31$0
-"Chrysanthemum"$"morifolium"$63$"sporophytic"$"60+1B, 62+1B, 62+2Bs, 63, 63+1B, 64(1, 1, 1, 4, 1, 1)"$"Chrysanthemum morifolium Ramat."$31$1
-"Chrysanthemum"$"morifolium"$63$"sporophytic"$"60+1B, 62+1B, 62+2Bs, 63, 63+1B, 64(1, 1, 1, 4, 1, 1)"$"Chrysanthemum morifolium Ramat."$31$1
-"Chrysanthemum"$"morifolium"$64$"sporophytic"$"60+1B, 62+1B, 62+2Bs, 63, 63+1B, 64(1, 1, 1, 4, 1, 1)"$"Chrysanthemum morifolium Ramat."$32$0

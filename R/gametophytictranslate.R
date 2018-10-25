@@ -1,8 +1,10 @@
 #' Cleans gametophytic counts
-#' @details gametophytic.translator cleans the gametophytic counts of CCDB dataset (downloaded by chromer R package)
+#' @details gametophytic.translator cleans the sporophytic counts of CCDB dataset (downloaded by chromer R package)
 #'
 #' @param rowfromCCDB Input is a row of CCDB downloaded by chromer
+#' @return A data frame with 1 row per chromosome number entry cleaned and the original record. Rules of cleaning are slightly different for gametophytic counts.
 #' @export
+
 gametophytic.translator<-function(rowfromCCDB){
 	  aux1<-rowfromCCDB #Examples Jun 2018: 92450, 104971,112258,  21258,183247, 16143, 37914, 91138,112303,112616,112663
     #aux1<-CCDBv1[2,]
@@ -36,8 +38,32 @@ gametophytic.translator<-function(rowfromCCDB){
       a1<-unlist(strsplit(as.character(a1), "(1, 1)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
       a1<-unlist(strsplit(as.character(a1), "(1, 2)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
       a1<-unlist(strsplit(as.character(a1), "(1, 3)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+      a1<-unlist(strsplit(as.character(a1), "(1, 4)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
       a1<-unlist(strsplit(as.character(a1), "(1, 1, 1)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+      a1<-unlist(strsplit(as.character(a1), "(130, 8, 8, 1, 1, 3, 6)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+      a1<-unlist(strsplit(as.character(a1), "(26, 33, 3, 20, 459)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+      a1<-unlist(strsplit(as.character(a1), "(1, 4, 2)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+      a1<-unlist(strsplit(as.character(a1), "(15, 2, 7, 1)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+      a1<-unlist(strsplit(as.character(a1), "(1, 2, 2)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+      a1<-unlist(strsplit(as.character(a1), "(6, 6)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+      a1<-unlist(strsplit(as.character(a1), "(27, 6)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+      a1<-unlist(strsplit(as.character(a1), "(11, 4)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+      a1<-unlist(strsplit(as.character(a1), "(240)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+      a1<-unlist(strsplit(as.character(a1), "(3, 1, 5, 5, 1, 1, 8, 4, 2, 5, 1, 1, 1)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+      a1<-unlist(strsplit(as.character(a1), "(4, 6)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+      a1<-unlist(strsplit(as.character(a1), "(3、21、1、3、4、１)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+      a1<-unlist(strsplit(as.character(a1), "(2, 3, 1)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+      a1<-unlist(strsplit(as.character(a1), "(3, 1)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+      a1<-unlist(strsplit(as.character(a1), "(14, 34, 21, 3)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+      a1<-unlist(strsplit(as.character(a1), "(1, 1, 1, 1)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+      a1<-unlist(strsplit(as.character(a1), "(1, 6, 2,10)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+      a1<-unlist(strsplit(as.character(a1), "(25, 31, 3, 19)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+      a1<-unlist(strsplit(as.character(a1), "(140)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+      a1<-unlist(strsplit(as.character(a1), "(12, 12)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+      a1<-unlist(strsplit(as.character(a1), "(12, 44, 1)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+      a1<-unlist(strsplit(as.character(a1), "(13, 1)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
       a1<-unlist(strsplit(as.character(a1), "(1, 1, 1, 4, 1, 1)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
+      a1<-unlist(strsplit(as.character(a1), "(1, 1, 1)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
       a1<-unlist(strsplit(as.character(a1), "(5, 4)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
       a1<-unlist(strsplit(as.character(a1), " (2, 5)", fixed = TRUE, perl = FALSE, useBytes = FALSE))
       a1<-unlist(strsplit(as.character(a1), "*", fixed = TRUE, perl = FALSE, useBytes = FALSE))
@@ -70,7 +96,7 @@ gametophytic.translator<-function(rowfromCCDB){
       #####Here the inverval listings and the B-chromosomes are removed or plus listings are separated
       long1<-length(a2)
       if(long1==0){
-        return("Non informative gametophytic count")
+        #print("Non informative gametophytic count")
       }else{
         a3<-rep(0,long1)
       
@@ -78,26 +104,26 @@ gametophytic.translator<-function(rowfromCCDB){
       ### Here I am cleaning things like 11II into 22, 11I+10II= 31, I=univalent, II=bivalent, III=trivalent, etc
       for(i in 1:long1){
         if(grepl("([0-9]{1,3})I[+]([0-9]{1,3})II",a2[i])==TRUE){ # match 1 to 3 numbers then I then + then 1 to 3 numbers then II example 11I+18II we need the parentheses to specify which is \\1 or \\2
-          a3[i]<-gsub("([0-9]{1,3})I[+]([0-9]{1,3})II","\\1*1+0+\\2*2",a2[i])}else{
+          a3[i]<-gsub("([0-9]{1,3})I[+]([0-9]{1,3})II","(\\1*1+0+\\2*2)/2",a2[i])}else{
             if(grepl("([0-9]{1,3})II[+]([0-9]{1,3})I",a2[i])==TRUE){
-              a3[i]<-gsub("([0-9]{1,3})II[+]([0-9]{1,3})I","\\1*2+0+\\2*1",a2[i])}else{
+              a3[i]<-gsub("([0-9]{1,3})II[+]([0-9]{1,3})I","(\\1*2+0+\\2*1)/2",a2[i])}else{
                 if(grepl("([0-9]{1,3})II[+]([0-9]{1,3})III",a2[i])==TRUE){
-                  a3[i]<-gsub("([0-9]{1,3})II[+]([0-9]{1,3})III","\\1*2+0+\\2*3",a2[i])}else{ 
+                  a3[i]<-gsub("([0-9]{1,3})II[+]([0-9]{1,3})III","(\\1*2+0+\\2*3)/2",a2[i])}else{ 
                     if(grepl("([0-9]{1,3})II[+]([0-9]{1,3})V",a2[i])==TRUE){
-                      a3[i]<-gsub("([0-9]{1,3})II[+]([0-9]{1,3})V","\\1*2+0+\\2*5",a2[i])}else{
+                      a3[i]<-gsub("([0-9]{1,3})II[+]([0-9]{1,3})V","(\\1*2+0+\\2*5)/2",a2[i])}else{
                         if(grepl("([0-9]{1,3})IV[+]([0-9]{1,3})II",a2[i])==TRUE){
-                          a3[i]<-gsub("([0-9]{1,3})IV[+]([0-9]{1,3})II","\\1*4+0+\\2*2",a2[i])}else{
+                          a3[i]<-gsub("([0-9]{1,3})IV[+]([0-9]{1,3})II","(\\1*4+0+\\2*2)/2",a2[i])}else{
                             if(grepl("([0-9]{1,3})III",a2[i])==TRUE){
-                              a3[i]<-gsub("([0-9]{1,3})III","\\1*3",a2[i])}else{
+                              a3[i]<-gsub("([0-9]{1,3})III","(\\1*3)/2",a2[i])}else{
                                 if(grepl("([0-9]{1,3})II",a2[i])==TRUE){
                                   #a3[i]<-gsub("([0-9])\sI","\\1",aux3)
-                                  a3[i]<-gsub("([0-9]{1,3})II","\\1*2",a2[i])}else{
+                                  a3[i]<-gsub("([0-9]{1,3})II","\\1",a2[i])}else{
                                     if(grepl("([0-9]{1,3})I",a2[i])==TRUE){
                                       # a3[i]<-gsub("([0-9])\sII","\\1*2",a2[i])
                                       a3[i]<-gsub("([0-9]{1,3})I","\\1",a2[i])}else{
                                         if(grepl("([0-9]{1,3})IV",a2[i])==TRUE){
                                           #a3[i]<-gsub("([0-9])\sIII","\\1*3",a3[i])
-                                          a3[i]<-gsub("([0-9]{1,3})IV","\\1*4",a2[i])
+                                          a3[i]<-gsub("([0-9]{1,3})IV","\\1*2",a2[i])
                                           #a3[i]<-gsub("([0-9])\sIV","\\1*4",a2[i])
                                         }else{
                                           a3[i]<-a2[i]
@@ -136,7 +162,6 @@ gametophytic.translator<-function(rowfromCCDB){
       
       long1<-length(a4)
       for (i in 1:long1){
-        print(i)
         if(grepl("*",a4[i])==TRUE){
           try(a4[i]<- eval(parse(text=a4[i])), silent=TRUE)
         }
@@ -184,7 +209,10 @@ gametophytic.translator<-function(rowfromCCDB){
         small.table<-data.frame(rep(genus.name,long3), rep(species.name,long3),a7,rep("gametophytic",long3),rep(aux1$gametophytic,long3),rep(aux1$resolved_name,long3),stringsAsFactors=FALSE) #Making a table that is returned where we can see the translatio and the original
         names(small.table)<-c("Genus","Species","CountTranslation", "Type","CountOriginal","OriginalNAME")
         return(small.table)
-      }else{print("can't clean gametophytic record")}
+      }else{  
+        small.table<-data.frame(rep(genus.name,1), rep(species.name,1),NA,rep("gametophytic",1),rep(aux1$gametophytic,1),rep(aux1$resolved_name,1),stringsAsFactors=FALSE)
+        names(small.table)<-c("Genus","Species","CountTranslation", "Type","CountOriginal","OriginalNAME")
+        return(small.table)}
       }
     }
   }

@@ -9,6 +9,9 @@ sporophytic.translator(rowfromCCDB)
 \arguments{
 \item{rowfromCCDB}{Input is a row of CCDB downloaded by chromer}
 }
+\value{
+A data frame with 1 row per chromosome number entry cleaned and the original record
+}
 \description{
 Cleans sporophytic counts
 }
